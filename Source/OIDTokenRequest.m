@@ -128,7 +128,7 @@ static NSString *const kAdditionalParametersKey = @"additionalParameters";
     _codeVerifier = [codeVerifier copy];
     _additionalParameters =
         [[NSDictionary alloc] initWithDictionary:additionalParameters copyItems:YES];
-    
+
     // Additional validation for the authorization_code grant type
     if ([_grantType isEqual:OIDGrantTypeAuthorizationCode]) {
       // redirect URI must not be nil
@@ -265,6 +265,8 @@ static NSString *const kAdditionalParametersKey = @"additionalParameters";
   static NSString *const kHTTPContentTypeHeaderKey = @"Content-Type";
   static NSString *const kHTTPContentTypeHeaderValue =
       @"application/x-www-form-urlencoded; charset=UTF-8";
+  static NSString *const kHTTPAcceptHeaderKey = @"Accept";
+  static NSString *const kHTTPAcceptHeaderValue = @"application/json";
 
   NSURL *tokenRequestURL = [self tokenRequestURL];
   NSMutableURLRequest *URLRequest = [[NSURLRequest requestWithURL:tokenRequestURL] mutableCopy];
@@ -274,13 +276,16 @@ static NSString *const kAdditionalParametersKey = @"additionalParameters";
   OIDURLQueryComponent *bodyParameters = [self tokenRequestBody];
   NSMutableDictionary *httpHeaders = [[NSMutableDictionary alloc] init];
 
+  // Response should be in JSON (not e.g. XML)
+  [httpHeaders setObject:kHTTPAcceptHeaderValue forKey:kHTTPAcceptHeaderKey];
+
   if (_clientSecret) {
-    // The client id and secret are encoded using the "application/x-www-form-urlencoded" 
+    // The client id and secret are encoded using the "application/x-www-form-urlencoded"
     // encoding algorithm per RFC 6749 Section 2.3.1.
     // https://tools.ietf.org/html/rfc6749#section-2.3.1
     NSString *encodedClientID = [OIDTokenUtilities formUrlEncode:_clientID];
     NSString *encodedClientSecret = [OIDTokenUtilities formUrlEncode:_clientSecret];
-    
+
     NSString *credentials =
         [NSString stringWithFormat:@"%@:%@", encodedClientID, encodedClientSecret];
     NSData *plainData = [credentials dataUsingEncoding:NSUTF8StringEncoding];
