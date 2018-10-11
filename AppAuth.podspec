@@ -1,10 +1,12 @@
 Pod::Spec.new do |s|
 
-  s.name         = "AppAuth"
-  s.version      = "0.94.0"
-  s.summary      = "AppAuth for iOS and macOS is a client SDK for communicating with OAuth 2.0 and OpenID Connect providers."
+  s.name         = "AppAuthGitHub"
+  s.version      = "0.94.1"
+  s.summary      = "AppAuth for iOS and macOS is a client SDK for communicating with OAuth 2.0 and OpenID Connect providers. Fork of the official AppAuth extended with GitHub support"
 
   s.description  = <<-DESC
+
+Fork of the official AppAuth-iOS extended with GitHub support.
 
 AppAuth for iOS and macOS is a client SDK for communicating with [OAuth 2.0]
 (https://tools.ietf.org/html/rfc6749) and [OpenID Connect]
@@ -32,7 +34,7 @@ It follows the OAuth 2.0 for Native Apps best current practice
 
   s.platforms    = { :ios => "7.0", :osx => "10.9", :watchos => "2.0", :tvos => "9.0" }
 
-  s.source       = { :git => "https://github.com/openid/AppAuth-iOS.git", :tag => s.version }
+  s.source       = { :git => "https://github.com/tobiastimm/AppAuth-iOS.git", :tag => s.version }
 
   s.source_files = "Source/*.{h,m}"
   s.requires_arc = true
