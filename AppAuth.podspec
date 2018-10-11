@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
 
-  s.name         = "AppAuthGitHub"
+  s.name         = "AppAuth"
   s.version      = "0.94.1"
   s.summary      = "AppAuth for iOS and macOS is a client SDK for communicating with OAuth 2.0 and OpenID Connect providers. Fork of the official AppAuth extended with GitHub support"
 
